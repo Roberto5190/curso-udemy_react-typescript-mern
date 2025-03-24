@@ -1,14 +1,16 @@
 
 
-export default function Guitar(guitar) {
+export default function Guitar({guitar,  addToCart}) {
     // destructuring del objeto guitar
     const {price, description, name, image, id} = guitar
 
-    const handleClick = (guitar) => {
-        console.log("Diste click en la guitarra: ", guitar);
-        
-    }
+    // const handleClick = (guitar) => {
+    //     setCart([...cart, guitar]) //copiamos superficialmente con spread operator lo que hay en el carrito y añadimos la guitarra seleccionada
+    // }
 
+
+    
+    
     return (
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
             <div className="col-4">
@@ -27,7 +29,7 @@ export default function Guitar(guitar) {
                 <button 
                     type="button" 
                     className="btn btn-dark w-100"
-                    onClick={() => handleClick(guitar)}
+                    onClick={() => addToCart(guitar)}
                     >
                     Agregar al Carrito
                 </button>

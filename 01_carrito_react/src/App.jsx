@@ -5,13 +5,31 @@ import Header from "./components/Header";
 import Guitar from "./components/Guitar";
 
 function App() {
-  // Iniciamos la variable data con un array vacio
+  // Iniciamos la variable de state data con un array vacio
   const [data, setData] = useState([])
+  const [cart, setCart] = useState([])
 
   // cuando se monta el componente actualizamoss data con el contenido de db/ recomendado para APIs
   useEffect(() => {
     setData(db)
   }, [])
+
+
+  const addToCart = (item) => {
+
+    const itemExists = cart.findIndex(guitar => guitar.id === item.id)
+
+    if(itemExists >= 0) { //existe en el carrito
+      console.log("este item ya existe");
+      const updatedCart = [...cart] //creamos una copia del carrito para no mutar el state
+      updatedCart[itemExists].quantity++ //actualizamos la cantidad
+      setCart(updatedCart) //seteamos updatedCart en el state del carrito
+      
+    } else {
+      item.quantity = 1
+      setCart([...cart, item])
+    }
+  }
 
 
   return (
@@ -23,13 +41,11 @@ function App() {
 
         <div className="row mt-5">
           {data.map((guitar) => (
-            <Guitar 
+            <Guitar
               key={guitar.id}
-              name={guitar.name}
-              description={guitar.description}
-              price={guitar.price}
-              image={guitar.image}
-              id={guitar.id}
+              guitar={guitar}
+              setCart={setCart}
+              addToCart={addToCart}
 
             />
           ))}
