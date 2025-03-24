@@ -29,6 +29,7 @@ function App() {
               description={guitar.description}
               price={guitar.price}
               image={guitar.image}
+              id={guitar.id}
 
             />
           ))}
