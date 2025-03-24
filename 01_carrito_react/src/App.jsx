@@ -35,6 +35,7 @@ function App() {
     <>
       <Header
         cart={cart}
+        
       />
 
       <main className="container-xl mt-5">
