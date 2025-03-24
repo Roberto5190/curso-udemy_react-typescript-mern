@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { db } from "./data/db"
 import "./App.css";
 import Header from "./components/Header";
 import Guitar from "./components/Guitar";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // Iniciamos la variable data con un array vacio
+  const [data, setData] = useState([])
+
+  // cuando se monta el componente actualizamoss data con el contenido de db/ recomendado para APIs
+  useEffect(() => {
+    setData(db)
+  }, [])
+
 
   return (
     <>
@@ -14,12 +22,17 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          <Guitar />
-          <Guitar />
-          <Guitar />
-          <Guitar />
-          <Guitar />
-          <Guitar />
+          {data.map((guitar) => (
+            <Guitar 
+              key={guitar.id}
+              name={guitar.name}
+              description={guitar.description}
+              price={guitar.price}
+              image={guitar.image}
+
+            />
+          ))}
+
         </div>
       </main>
 
