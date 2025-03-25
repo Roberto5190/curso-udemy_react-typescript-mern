@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export default function Header({ cart, removeFromCart, incrementQuantity, decreaseQuantity }) {
+export default function Header({ cart, removeFromCart, incrementQuantity, decreaseQuantity, clearCart }) {
 
     // State Derivado
     const isEmptyCart = useMemo( () => cart.length === 0, [cart] ) //con useMemo solo renderizamos el carrito cuando se actualiza la dependencia cart
@@ -94,7 +94,7 @@ export default function Header({ cart, removeFromCart, incrementQuantity, decrea
                                         <p className="text-end">
                                             Total pagar: <span className="fw-bold">${cartTotal}</span>
                                         </p>
-                                        <button className="btn btn-dark w-100 mt-3 p-2">
+                                        <button className="btn btn-dark w-100 mt-3 p-2" onClick={clearCart}>
                                             Vaciar Carrito
                                         </button>
                                     </>

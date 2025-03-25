@@ -49,7 +49,6 @@ function App() {
     })
 
     setCart(updatedCart) //actualizamos el estado del carrito con el nuevo array
-
   }
 
   const decreaseQuantity = (id) => {
@@ -64,8 +63,13 @@ function App() {
     })
 
     setCart(updatedCart) //actualizamos el estado del carrito con el nuevo array
-
   }
+
+  const clearCart = () => {
+    setCart([])
+  }
+
+
 
 
 
@@ -76,6 +80,7 @@ function App() {
         removeFromCart={removeFromCart}
         incrementQuantity={incrementQuantity}
         decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
       />
 
       <main className="container-xl mt-5">
