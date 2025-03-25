@@ -5,9 +5,15 @@ import Header from "./components/Header";
 import Guitar from "./components/Guitar";
 
 function App() {
+
+  const initialCart = () => {
+    const localStorageCart = localStorage.getItem('cart') //obtenemos el carrito del localStorage
+    return localStorageCart ? JSON.parse(localStorageCart) : [] //si hay elementos en el carrito loss converitmos a string si no lo dejamos vacio
+  }
+
   // Iniciamos la variable de state data con un array vacio
   const [data, setData] = useState([])
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(initialCart)
 
   const MAX_ITEMS = 5
   const MIN_ITEMS = 1
@@ -17,7 +23,12 @@ function App() {
     setData(db)
   }, [])
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+
   // FUNCTIONS
+  
   const addToCart = (item) => {
 
     const itemExists = cart.findIndex(guitar => guitar.id === item.id)
