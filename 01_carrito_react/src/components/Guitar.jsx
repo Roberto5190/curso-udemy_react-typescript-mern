@@ -4,9 +4,6 @@ export default function Guitar({guitar,  addToCart}) {
     // destructuring del objeto guitar
     const {price, description, name, image, id} = guitar
 
-    // const handleClick = (guitar) => {
-    //     setCart([...cart, guitar]) //copiamos superficialmente con spread operator lo que hay en el carrito y añadimos la guitarra seleccionada
-    // }
 
 
     

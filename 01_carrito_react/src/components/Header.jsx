@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export default function Header({ cart }) {
+export default function Header({ cart, removeFromCart, incrementQuantity, decrementQuantity }) {
 
     // State Derivado
     const isEmptyCart = useMemo( () => cart.length === 0, [cart] ) //con useMemo solo renderizamos el carrito cuando se actualiza la dependencia cart
@@ -59,16 +59,28 @@ export default function Header({ cart }) {
                                                         <td>{guitar.name}</td>
                                                         <td className="fw-bold">${guitar.price}</td>
                                                         <td className="flex align-items-start gap-4">
-                                                            <button type="button" className="btn btn-dark">
+                                                            <button 
+                                                                type="button" 
+                                                                className="btn btn-dark"
+                                                                onClick={() => decrementQuantity(guitar.id)}
+                                                                >
                                                                 -
                                                             </button>
                                                             {guitar.quantity}
-                                                            <button type="button" className="btn btn-dark">
+                                                            <button 
+                                                                type="button" 
+                                                                className="btn btn-dark"
+                                                                onClick={() => incrementQuantity(guitar.id)}
+                                                                >
                                                                 +
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <button className="btn btn-danger" type="button">
+                                                            <button 
+                                                                className="btn btn-danger"  
+                                                                type="button"
+                                                                onClick={() => removeFromCart(guitar.id)}
+                                                                >
                                                                 X
                                                             </button>
                                                         </td>

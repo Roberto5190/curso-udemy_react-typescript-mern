@@ -9,12 +9,15 @@ function App() {
   const [data, setData] = useState([])
   const [cart, setCart] = useState([])
 
+  const MAX_ITEMS = 5
+  const MIN_ITEMS = 1
+
   // cuando se monta el componente actualizamoss data con el contenido de db/ recomendado para APIs
   useEffect(() => {
     setData(db)
   }, [])
 
-
+  // FUNCTIONS
   const addToCart = (item) => {
 
     const itemExists = cart.findIndex(guitar => guitar.id === item.id)
@@ -30,12 +33,49 @@ function App() {
     }
   }
 
+  const removeFromCart = (id) => {
+    setCart(prevCart => prevCart.filter(guitar => guitar.id !== id)) //actualiza el estado del carrito eliminando la guitarra cuyo id coincide con el valor dado, utilizando filter para crear un nuevo array sin ese elemento.
+  }
+
+  const incrementQuantity = (id) => {
+    const updatedCart = cart.map( item => { //itera por cada item del carrito
+      if(item.id === id && item.quantity < MAX_ITEMS) {  //si su id es igual al id pasado por el parametro
+        return {  //devuelve un objeto con una copia del item y su quantity actualizada
+          ...item,
+          quantity: item.quantity + 1
+        }
+      }
+      return item //el resto de items los mantenemos intactos y los retornamos
+    })
+
+    setCart(updatedCart) //actualizamos el estado del carrito con el nuevo array
+
+  }
+
+  const decrementQuantity = (id) => {
+    const updatedCart = cart.map( item => { //itera por cada item del carrito
+      if(item.id === id && item.quantity > MIN_ITEMS) {  //si su id es igual al id pasado por el parametro
+        return {  //devuelve un objeto con una copia del item y su quantity actualizada
+          ...item,
+          quantity: item.quantity - 1
+        }
+      }
+      return item //el resto de items los mantenemos intactos y los retornamos
+    })
+
+    setCart(updatedCart) //actualizamos el estado del carrito con el nuevo array
+
+  }
+
+
 
   return (
     <>
       <Header
         cart={cart}
-        
+        removeFromCart={removeFromCart}
+        incrementQuantity={incrementQuantity}
+        decrementQuantity={decrementQuantity}
       />
 
       <main className="container-xl mt-5">
