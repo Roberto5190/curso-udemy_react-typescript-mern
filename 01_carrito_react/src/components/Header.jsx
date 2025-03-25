@@ -4,6 +4,9 @@ export default function Header({ cart }) {
 
     // State Derivado
     const isEmptyCart = () => cart.length === 0
+    // total del carrito
+    // .reduce recorre el array y acumula el valor(total del carrito) que empieza en 0 y va sumando el el resultado de cada iteración
+    const cartTotal = () => cart.reduce((total, item) => total + (item.quantity * item.price), 0) //recorre el array cart y suma el la cantidad del producto y el precio, devolviendo el total del carrito.
 
 
     return (
@@ -76,7 +79,7 @@ export default function Header({ cart }) {
                                             </tbody>
                                         </table>
                                         <p className="text-end">
-                                            Total pagar: <span className="fw-bold">$899</span>
+                                            Total pagar: <span className="fw-bold">${cartTotal()}</span>
                                         </p>
                                         <button className="btn btn-dark w-100 mt-3 p-2">
                                             Vaciar Carrito
