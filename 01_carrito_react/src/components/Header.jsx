@@ -1,12 +1,13 @@
-
+import { useMemo } from "react";
 
 export default function Header({ cart }) {
 
     // State Derivado
-    const isEmptyCart = () => cart.length === 0
+    const isEmptyCart = useMemo( () => cart.length === 0, [cart] ) //con useMemo solo renderizamos el carrito cuando se actualiza la dependencia cart
+
     // total del carrito
     // .reduce recorre el array y acumula el valor(total del carrito) que empieza en 0 y va sumando el el resultado de cada iteración
-    const cartTotal = () => cart.reduce((total, item) => total + (item.quantity * item.price), 0) //recorre el array cart y suma el la cantidad del producto y el precio, devolviendo el total del carrito.
+    const cartTotal = useMemo( () => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart] )//recorre el array cart y suma el la cantidad del producto y el precio, devolviendo el total del carrito.
 
 
     return (
@@ -31,7 +32,7 @@ export default function Header({ cart }) {
                             />
 
                             <div id="carrito" className="bg-white p-3">
-                                {isEmptyCart() ? (
+                                {isEmptyCart ? (
                                     <p className="text-center">El carrito esta vacio</p>
                                 ) : (
                                     <>
@@ -79,7 +80,7 @@ export default function Header({ cart }) {
                                             </tbody>
                                         </table>
                                         <p className="text-end">
-                                            Total pagar: <span className="fw-bold">${cartTotal()}</span>
+                                            Total pagar: <span className="fw-bold">${cartTotal}</span>
                                         </p>
                                         <button className="btn btn-dark w-100 mt-3 p-2">
                                             Vaciar Carrito
