@@ -52,7 +52,7 @@ function App() {
 
   }
 
-  const decrementQuantity = (id) => {
+  const decreaseQuantity = (id) => {
     const updatedCart = cart.map( item => { //itera por cada item del carrito
       if(item.id === id && item.quantity > MIN_ITEMS) {  //si su id es igual al id pasado por el parametro
         return {  //devuelve un objeto con una copia del item y su quantity actualizada
@@ -75,7 +75,7 @@ function App() {
         cart={cart}
         removeFromCart={removeFromCart}
         incrementQuantity={incrementQuantity}
-        decrementQuantity={decrementQuantity}
+        decreaseQuantity={decreaseQuantity}
       />
 
       <main className="container-xl mt-5">

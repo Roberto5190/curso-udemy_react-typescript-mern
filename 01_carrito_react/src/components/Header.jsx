@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export default function Header({ cart, removeFromCart, incrementQuantity, decrementQuantity }) {
+export default function Header({ cart, removeFromCart, incrementQuantity, decreaseQuantity }) {
 
     // State Derivado
     const isEmptyCart = useMemo( () => cart.length === 0, [cart] ) //con useMemo solo renderizamos el carrito cuando se actualiza la dependencia cart
@@ -62,7 +62,7 @@ export default function Header({ cart, removeFromCart, incrementQuantity, decrem
                                                             <button 
                                                                 type="button" 
                                                                 className="btn btn-dark"
-                                                                onClick={() => decrementQuantity(guitar.id)}
+                                                                onClick={() => decreaseQuantity(guitar.id)}
                                                                 >
                                                                 -
                                                             </button>
