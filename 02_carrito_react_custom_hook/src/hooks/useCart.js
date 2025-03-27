@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { db } from "../data/db"
 
 export const useCart = () => {
@@ -77,6 +77,14 @@ export const useCart = () => {
         setCart([])
     }
 
+
+    // State Derivado
+    const isEmptyCart = useMemo(() => cart.length === 0, [cart]) //con useMemo solo renderizamos el carrito cuando se actualiza la dependencia cart    // total del carrito
+    // .reduce recorre el array y acumula el valor(total del carrito) que empieza en 0 y va sumando el el resultado de cada iteración
+    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart])//recorre el array cart y suma el la cantidad del producto y el precio, devolviendo el total del carrito.
+
+
+
     return {
         data,
         cart,
@@ -84,6 +92,8 @@ export const useCart = () => {
         removeFromCart,
         decreaseQuantity,
         incrementQuantity,
-        clearCart
+        clearCart,
+        isEmptyCart,
+        cartTotal
     }
 }

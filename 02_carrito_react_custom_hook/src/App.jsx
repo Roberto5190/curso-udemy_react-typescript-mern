@@ -5,7 +5,8 @@ import Guitar from "./components/Guitar";
 import { useCart } from "./hooks/useCart";
 
 function App() {
-  const { data, cart, addToCart, removeFromCart, decreaseQuantity, incrementQuantity, clearCart } = useCart()
+  const { data, cart, addToCart, removeFromCart, decreaseQuantity, incrementQuantity, clearCart, 
+    isEmptyCart, cartTotal } = useCart()
 
   return (
     <>
@@ -15,6 +16,8 @@ function App() {
         incrementQuantity={incrementQuantity}
         decreaseQuantity={decreaseQuantity}
         clearCart={clearCart}
+        isEmptyCart={isEmptyCart}
+        cartTotal={cartTotal}
       />
 
       <main className="container-xl mt-5">
