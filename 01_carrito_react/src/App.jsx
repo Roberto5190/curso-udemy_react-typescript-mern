@@ -3,9 +3,12 @@ import { db } from "./data/db"
 import "./App.css";
 import Header from "./components/Header";
 import Guitar from "./components/Guitar";
+import { useCart } from "../../02_carrito_react_custom_hook/src/hooks/useCart";
 
 function App() {
-
+  useCart()
+  console.log("Hola");
+  
   const initialCart = () => {
     const localStorageCart = localStorage.getItem('cart') //obtenemos el carrito del localStorage
     return localStorageCart ? JSON.parse(localStorageCart) : [] //si hay elementos en el carrito loss converitmos a string si no lo dejamos vacio

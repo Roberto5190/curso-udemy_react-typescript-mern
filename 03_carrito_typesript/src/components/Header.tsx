@@ -1,13 +1,6 @@
-import { useMemo } from "react";
 
-export default function Header({ cart, removeFromCart, incrementQuantity, decreaseQuantity, clearCart }) {
+export default function Header({ cart, removeFromCart, incrementQuantity, decreaseQuantity, clearCart, isEmptyCart, cartTotal }) {
 
-    // State Derivado
-    const isEmptyCart = useMemo( () => cart.length === 0, [cart] ) //con useMemo solo renderizamos el carrito cuando se actualiza la dependencia cart
-
-    // total del carrito
-    // .reduce recorre el array y acumula el valor(total del carrito) que empieza en 0 y va sumando el el resultado de cada iteración
-    const cartTotal = useMemo( () => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart] )//recorre el array cart y suma el la cantidad del producto y el precio, devolviendo el total del carrito.
 
 
     return (
