@@ -1,24 +1,22 @@
 import { useEffect, useState, useMemo } from "react";
 import { db } from "../data/db"
+import type { Guitar, CartItem } from "../types/types";
+
 
 export const useCart = () => {
 
-    const initialCart = () => {
+    const initialCart = () : CartItem[] => {
         const localStorageCart = localStorage.getItem('cart') //obtenemos el carrito del localStorage
         return localStorageCart ? JSON.parse(localStorageCart) : [] //si hay elementos en el carrito loss converitmos a string si no lo dejamos vacio
     }
 
     // Iniciamos la variable de state data con un array vacio
-    const [data, setData] = useState([])
+    const [data] = useState(db)
     const [cart, setCart] = useState(initialCart)
 
     const MAX_ITEMS = 5
     const MIN_ITEMS = 1
 
-    // cuando se monta el componente actualizamoss data con el contenido de db/ recomendado para APIs
-    useEffect(() => {
-        setData(db)
-    }, [])
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -26,7 +24,7 @@ export const useCart = () => {
 
     // FUNCTIONS
 
-    const addToCart = (item) => {
+    const addToCart = (item : Guitar)  => {
 
         const itemExists = cart.findIndex(guitar => guitar.id === item.id)
 
@@ -36,16 +34,16 @@ export const useCart = () => {
             setCart(updatedCart) //seteamos updatedCart en el state del carrito
 
         } else {
-            item.quantity = 1
-            setCart([...cart, item])
+            const newItem : CartItem = {...item, quantity : 1}
+            setCart([...cart, newItem])
         }
     }
 
-    const removeFromCart = (id) => {
+    const removeFromCart = (id : Guitar['id']) => {
         setCart(prevCart => prevCart.filter(guitar => guitar.id !== id)) //actualiza el estado del carrito eliminando la guitarra cuyo id coincide con el valor dado, utilizando filter para crear un nuevo array sin ese elemento.
     }
 
-    const incrementQuantity = (id) => {
+    const incrementQuantity = (id : Guitar['id'] )  => {
         const updatedCart = cart.map(item => { //itera por cada item del carrito
             if (item.id === id && item.quantity < MAX_ITEMS) {  //si su id es igual al id pasado por el parametro
                 return {  //devuelve un objeto con una copia del item y su quantity actualizada
@@ -59,7 +57,7 @@ export const useCart = () => {
         setCart(updatedCart) //actualizamos el estado del carrito con el nuevo array
     }
 
-    const decreaseQuantity = (id) => {
+    const decreaseQuantity = (id : Guitar['id']) => {
         const updatedCart = cart.map(item => { //itera por cada item del carrito
             if (item.id === id && item.quantity > MIN_ITEMS) {  //si su id es igual al id pasado por el parametro
                 return {  //devuelve un objeto con una copia del item y su quantity actualizada

@@ -1,8 +1,13 @@
+import type { Guitar } from "../types/types";
 
+type GuitarProps = {
+    guitar : Guitar, 
+    addToCart : (item : Guitar) => void
+}
 
-export default function Guitar({guitar,  addToCart}) {
+export default function Guitar({guitar,  addToCart} : GuitarProps) {
     // destructuring del objeto guitar
-    const {price, description, name, image, id} = guitar
+    const { price, description, name, image, } = guitar
 
 
 

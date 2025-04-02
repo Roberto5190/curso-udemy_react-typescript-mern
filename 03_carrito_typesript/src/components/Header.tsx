@@ -1,6 +1,25 @@
+import type { Guitar, CartItem } from "../types/types";
 
-export default function Header({ cart, removeFromCart, incrementQuantity, decreaseQuantity, clearCart, isEmptyCart, cartTotal }) {
+type HeaderProps = {
+    cart: CartItem[]
+    removeFromCart: (id : Guitar['id']) => void
+    incrementQuantity: (id : Guitar['id']) => void
+    decreaseQuantity: (id : Guitar['id']) => void
+    clearCart: () => void
+    isEmptyCart: boolean
+    cartTotal: number
+}
 
+
+export default function Header({ 
+        cart, 
+        removeFromCart, 
+        incrementQuantity, 
+        decreaseQuantity, 
+        clearCart,
+        isEmptyCart, 
+        cartTotal 
+    } : HeaderProps) {
 
 
     return (
